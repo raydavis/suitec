@@ -27,7 +27,7 @@
       'keywords': '',
       'category': '',
       'user': '',
-      'type': ''
+      'type': []
     };
 
     // Variable that keeps track of the categories in the current course
