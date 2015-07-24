@@ -61,6 +61,8 @@
             </div>
           </div>
         </div>
+
+
         <div class="col-sm-6 assetlibrary-item-metadata-column">
           <div class="row">
             <div class="col-xs-3 text-right assetlibrary-item-metadata-label">Category</div>
@@ -72,12 +74,12 @@
                 <div data-ng-if="!asset.categories.length">No category</div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-xs-3 text-right assetlibrary-item-metadata-label">Source</div>
-              <div class="col-xs-9">
-                <div data-ng-if="asset.source || asset.url" class="col-threedots"><a data-ng-href="{{asset.source || asset.url}}" target="_blank">{{asset.source || asset.url}}</a></div>
-                <div data-ng-if="!asset.source && !asset.url">No source</div>
-              </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3 text-right assetlibrary-item-metadata-label">Source</div>
+            <div class="col-xs-9">
+              <div data-ng-if="asset.type !== 'whiteboard' && (asset.source || asset.url)" class="col-threedots"><a data-ng-href="{{asset.source || asset.url}}" target="_blank">{{asset.source || asset.url}}</a></div>
+              <div data-ng-if="asset.type !== 'whiteboard' && (!asset.source && !asset.url)">No source</div>
             </div>
           </div>
         </div>

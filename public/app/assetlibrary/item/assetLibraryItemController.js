@@ -17,7 +17,7 @@
 
   'use strict';
 
-  angular.module('collabosphere').controller('AssetLibraryItemController', function(assetLibraryFactory, userFactory, utilService, $stateParams, $scope) {
+  angular.module('collabosphere').controller('AssetLibraryItemController', function(assetLibraryFactory, userFactory, utilService, $filter, $stateParams, $scope) {
 
     // Variable that will keep track of the current asset id
     var assetId = $stateParams.assetId;
@@ -73,7 +73,7 @@
      */
     var canManageAsset = $scope.canManageAsset = function() {
       if ($scope.asset) {
-        return $scope.me.is_admin || $scope.asset.user.id === $scope.me.id;
+        return $scope.me.is_admin || ($filter('filter')($scope.asset.users, {'id': $scope.me.id}).length > 0);
       }
     };
 

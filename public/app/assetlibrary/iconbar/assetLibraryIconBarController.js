@@ -17,7 +17,7 @@
 
   'use strict';
 
-  angular.module('collabosphere').controller('AssetLibraryIconBarController', function(assetLibraryFactory, userFactory, $scope) {
+  angular.module('collabosphere').controller('AssetLibraryIconBarController', function(assetLibraryFactory, userFactory, $filter, $scope) {
 
     /**
      * Like an asset. If the asset has been liked by the current user already, the like will be undone
@@ -36,6 +36,12 @@
         // Indicate that the asset has been updated
         $scope.$emit('assetLibraryAssetUpdated', asset);
       });
+    };
+
+    $scope.isAssetUser = function(asset) {
+      if ($scope.asset && $scope.me) {
+        return ($filter('filter')(asset.users, {'id': $scope.me.id}).length > 0);
+      }
     };
 
     userFactory.getMe().success(function(me) {
