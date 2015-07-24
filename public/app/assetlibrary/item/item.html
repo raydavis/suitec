@@ -43,7 +43,7 @@
                   <div class="media-object col-avatar" data-ng-style="{'background-image': 'url(' + user.canvas_image + ')'}"></div>
                 </div>
                 <div class="media-left media-middle assetlibrary-item-metadata-user-name">
-                  <i class="fa fa-graduation-cap" data-ng-if="user.is_admin"></i> {{user.canvas_full_name}}
+                  <a ui-sref="assetlibrarylist({'user': user.id})" ui-sref-opts="{'inherit': false}"><i class="fa fa-graduation-cap" data-ng-if="user.is_admin"></i> {{user.canvas_full_name}}</a>
                   <span data-ng-if="me.id === user.id">(me)</span>
                 </div>
               </li>
@@ -60,24 +60,23 @@
           <div iconbar asset="asset"></div>
         </div>
       </div>
-        <div class="row">
-          <div class="col-sm-6 assetlibrary-item-metadata-column">
-            <div class="row">
-              <div class="col-xs-3 text-right assetlibrary-item-metadata-label">Description</div>
-              <div class="col-xs-9">
-                <div data-ng-if="asset.description" data-ng-bind-html="asset.description | linky:'_blank'"></div>
-                <div data-ng-if="!asset.description">No description</div>
-              </div>
+      <div class="row">
+        <div class="col-sm-6 assetlibrary-item-metadata-column">
+          <div class="row">
+            <div class="col-xs-3 text-right assetlibrary-item-metadata-label">Description</div>
+            <div class="col-xs-9">
+              <div data-ng-if="asset.description" data-ng-bind-html="asset.description | linky:'_blank' | hashtags"></div>
+              <div data-ng-if="!asset.description">No description</div>
             </div>
           </div>
-          <div class="col-sm-6 assetlibrary-item-metadata-column">
-            <div class="row">
-              <div class="col-xs-3 text-right assetlibrary-item-metadata-label">Category</div>
-              <div class="col-xs-9">
-                <div data-ng-if="asset.categories.length">
-                  <div data-ng-repeat="category in asset.categories">
-                    <a>{{category.title}}</a>
-                  </div>
+        </div>
+        <div class="col-sm-6 assetlibrary-item-metadata-column">
+          <div class="row">
+            <div class="col-xs-3 text-right assetlibrary-item-metadata-label">Category</div>
+            <div class="col-xs-9">
+              <div data-ng-if="asset.categories.length">
+                <div data-ng-repeat="category in asset.categories">
+                  <a ui-sref="assetlibrarylist({'category': category.id})" ui-sref-opts="{'inherit': false}">{{category.title}}</a>
                 </div>
                 <div data-ng-if="!asset.categories.length">No category</div>
               </div>
