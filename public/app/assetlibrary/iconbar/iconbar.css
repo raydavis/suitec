@@ -13,6 +13,10 @@
  * permissions and limitations under the License.
  */
 
+.assetlibrary-iconbar div {
+  display: inline;
+}
+
 .assetlibrary-iconbar .btn {
   margin-top: -2px;
   padding: 0;
