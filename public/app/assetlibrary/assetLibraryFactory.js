@@ -37,7 +37,7 @@
     /**
      * Get the assets for the current course
      *
-     * @param  {Number}               [page]                          The results page to retrieve
+     * @param  {Number}               [offset]                        The id of the asset to start paging from
      * @param  {Object}               [searchOptions]                 A set of options to filter the results by
      * @param  {String}               [searchOptions.keywords]        A string to filter the assets by
      * @param  {Number}               [searchOptions.category]        The id of the category to filter the assets by
@@ -45,12 +45,14 @@
      * @param  {String}               [searchOptions.type]            The type of assets
      * @return {Promise<Object>}                                      $http promise returning the total number of assets for the current course and the assets in the current page
      */
-    var getAssets = function(page, searchOptions) {
-      page = page || 0;
+    var getAssets = function(offset, searchOptions) {
       searchOptions = searchOptions || {};
 
-      var url = '/assets';
-      url += '?offset=' + (page * 10);
+      var url = '/assets?';
+
+      if (offset) {
+        url += 'offset=' + offset;
+      }
       if (searchOptions.keywords) {
         url += '&keywords=' + encodeURIComponent(searchOptions.keywords);
       }

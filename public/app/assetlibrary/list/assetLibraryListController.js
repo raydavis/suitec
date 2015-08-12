@@ -64,17 +64,16 @@
       // Indicate the no further REST API requests should be made
       // until the current request has completed
       $scope.list.ready = false;
-      assetLibraryFactory.getAssets($scope.list.page, $scope.searchOptions).success(function(assets) {
+      assetLibraryFactory.getAssets($scope.list.offset, $scope.searchOptions).success(function(assets) {
         $scope.assets = $scope.assets.concat(assets.results);
         // Only request another page of results if the number of items in the
         // current result set is the same as the maximum number of items in a
         // retrieved asset library page
         if (assets.results.length === 10) {
           $scope.list.ready = true;
+          $scope.list.offset = assets.results[assets.results.length - 1].id;
         }
       });
-      // Ensure that the next page is requested the next time
-      $scope.list.page++;
     };
 
     /**
@@ -110,7 +109,7 @@
      * Listen for events indicating that the user wants to search through the asset library
      */
     $scope.$on('assetLibrarySearchSearch', function(ev, searchOptions) {
-      $scope.list.page = 0;
+      $scope.list.offset = null;
       $scope.assets = [];
       $scope.searchOptions = searchOptions;
 
